@@ -15,7 +15,7 @@ class TicTacToeNode
     if @board.won?
       return @board.winner != evaluator
     elsif self.next_mover_mark == evaluator
-      self.children.all? {|child| child.losing_node?(evaluator)}
+      return self.children.all? {|child| child.losing_node?(evaluator)}
     elsif self.next_mover_mark != evaluator
       return self.children.any? {|child| child.losing_node?(evaluator)}
     end
@@ -25,9 +25,9 @@ class TicTacToeNode
     if @board.won?
       return @board.winner == evaluator
    elsif self.next_mover_mark == evaluator
-      self.children.all? {|child| child.winning_node?(evaluator)}
-    elsif self.next_mover_mark != evaluator
       return self.children.any? {|child| child.winning_node?(evaluator)}
+    elsif self.next_mover_mark != evaluator
+      return self.children.all? {|child| child.winning_node?(evaluator)}
     end
   end
 
